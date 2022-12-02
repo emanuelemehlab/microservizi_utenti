@@ -1,17 +1,15 @@
 package com.example.microservizi_utenti.Entities;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 @Entity
 public class Cliente {
     @Id
-    @GeneratedValue
-    private Long id;
+    private String email;
     private String nome;
 
-    public Cliente(String nome, String cognome, String email) {
+    public Cliente(String email,String nome, String cognome) {
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
@@ -46,13 +44,4 @@ public class Cliente {
     }
 
     private String cognome;
-    private String email;
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
 }
