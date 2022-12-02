@@ -23,9 +23,14 @@ public class Controller {
     }
     @GetMapping("/cliente")
     public String user(@AuthenticationPrincipal OAuth2User principal) {
-        Cliente c = new Cliente(principal.getAttribute("given_name"),principal.getAttribute("family_name"),principal.getAttribute("email"));
-        if(!repository.findAll().contains(c))
+        Cliente c = new Cliente(principal.getAttribute("email"),principal.getAttribute("given_name"),principal.getAttribute("family_name"));
+        try{
+            if(!repository.findAll().contains(c))
+                repository.save(c);
+        }catch(Exception e){
             repository.save(c);
+        }
+
         return "loggato come "+principal.getAttribute("name");
     }
 }
