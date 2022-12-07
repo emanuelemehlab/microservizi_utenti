@@ -2,10 +2,11 @@ package com.example.microservizi_utenti.Entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-import java.util.Date;
 
 @Entity
+@Table(name = "tassista")
 public class Tassista {
     @Id
     private String email;
@@ -16,7 +17,7 @@ public class Tassista {
 
     private String nPatente;
 
-    private Date scadenza;
+    private String scadenza;
 
     private String targa;
 
@@ -28,11 +29,11 @@ public class Tassista {
         this.nPatente = nPatente;
     }
 
-    public Date getScadenza() {
+    public String getScadenza() {
         return scadenza;
     }
 
-    public void setScadenza(Date scadenza) {
+    public void setScadenza(String scadenza) {
         this.scadenza = scadenza;
     }
 
@@ -65,6 +66,15 @@ public class Tassista {
         return nome;
     }
 
+    public Tassista(String email, String nome, String cognome, String nPatente, String scadenza, String targa) {
+        this.email = email;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.nPatente = nPatente;
+        this.scadenza = scadenza;
+        this.targa = targa;
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -75,5 +85,17 @@ public class Tassista {
 
     public void setCognome(String cognome) {
         this.cognome = cognome;
+    }
+
+    @Override
+    public String toString() {
+        return "Tassista{" +
+                "email='" + email + '\'' +
+                ", nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", nPatente='" + nPatente + '\'' +
+                ", scadenza=" + scadenza +
+                ", targa='" + targa + '\'' +
+                '}';
     }
 }

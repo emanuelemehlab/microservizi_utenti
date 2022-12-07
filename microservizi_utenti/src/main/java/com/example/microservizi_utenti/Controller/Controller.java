@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
-@RequestMapping("/api/v1")
+//@RequestMapping("/api/v1")
 public class Controller {
 
     @Autowired
@@ -39,25 +39,28 @@ public class Controller {
         return "loggato come cliente: "+principal.getAttribute("name");
     }
 
-
     @GetMapping("/tassista")
-    public RedirectView tassista(@AuthenticationPrincipal OAuth2User principal) {
+    public String tassista(@AuthenticationPrincipal OAuth2User principal) {
         Tassista t = new Tassista(principal.getAttribute("email"),principal.getAttribute("given_name"),principal.getAttribute("family_name"));
         try{
             if(!Tasrepository.existsById(t.getEmail())) {
                 Tasrepository.save(t);
-                return new RedirectView("iscrizioneTassista");
+//                return new RedirectView("iscrizioneTassista");
+                return "Primo passo iscrizione tassista effettuato.";
             }else{
                 if(Tasrepository.findAll().contains(t)){
-                    return new RedirectView("iscrizioneTassista");
+//                    return new RedirectView("iscrizioneTassista");
+                    return "Primo passo iscrizione tassista già effettuato.";
                 }else{
-                    return new RedirectView("tassistaHome");
+//                    return new RedirectView("tassistaHome");
+                    return "Login effettuato";
                 }
 
             }
         }catch(Exception e){
             Tasrepository.save(t);
-            return new RedirectView("iscrizioneTassista");
+//            return new RedirectView("iscrizioneTassista");
+            return e.getMessage();
         }
     }
 
@@ -82,18 +85,22 @@ public class Controller {
     }
 
     @PostMapping("/salvaDatiPatente")
-    public String datiPatente(@AuthenticationPrincipal OAuth2User principal, @RequestBody Tassista datitas){
+    public String datiPatente(@RequestBody Tassista datitas){
        try{
-           Tassista t = new Tassista(principal.getAttribute("email"),principal.getAttribute("given_name"),principal.getAttribute("family_name"));
+
+           Tassista t = new Tassista();
+           t.setEmail(datitas.getEmail());
+           t.setNome(datitas.getNome());
+           t.setCognome(datitas.getCognome());
            t.setnPatente(datitas.getnPatente());
            t.setScadenza(datitas.getScadenza());
            t.setTarga(datitas.getTarga());
            Tasrepository.save(t);
            return "OK, Dati aggiornati correttamente";
        }catch(Exception e){
-           return "Qualcosa è andato storto :(";
+           return "Qualcosa è andato storto :(" + e.getMessage()+"--->"+datitas.toString();
        }
-
-
     }
+
+
 }
