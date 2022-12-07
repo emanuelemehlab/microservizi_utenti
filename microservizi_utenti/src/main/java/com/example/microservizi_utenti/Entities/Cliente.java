@@ -2,8 +2,10 @@ package com.example.microservizi_utenti.Entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "cliente")
 public class Cliente {
     @Id
     private String email;
