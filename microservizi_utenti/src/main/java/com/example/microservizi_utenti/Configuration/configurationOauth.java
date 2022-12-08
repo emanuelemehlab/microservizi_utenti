@@ -22,7 +22,7 @@ public class configurationOauth {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers(HttpMethod.GET,"/").and().ignoring().requestMatchers(HttpMethod.POST);
+        return (web) -> web.ignoring().requestMatchers("/api/v1/**").and().ignoring().requestMatchers(HttpMethod.GET,"/").and().ignoring().requestMatchers(HttpMethod.POST).and().ignoring().requestMatchers(HttpMethod.PUT);
     }
 
 

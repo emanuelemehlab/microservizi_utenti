@@ -26,7 +26,7 @@ public class Controller {
     public String helloWorld(){
         return "Hello World";
     }
-    @GetMapping("/cliente")
+    @GetMapping("/loginCliente")
     public String cliente(@AuthenticationPrincipal OAuth2User principal) {
         Cliente c = new Cliente(principal.getAttribute("email"),principal.getAttribute("given_name"),principal.getAttribute("family_name"));
         try{
@@ -39,7 +39,7 @@ public class Controller {
         return "loggato come cliente: "+principal.getAttribute("name");
     }
 
-    @GetMapping("/tassista")
+    @GetMapping("/loginTassista")
     public String tassista(@AuthenticationPrincipal OAuth2User principal) {
         Tassista t = new Tassista(principal.getAttribute("email"),principal.getAttribute("given_name"),principal.getAttribute("family_name"));
         try{
@@ -84,23 +84,7 @@ public class Controller {
         }
     }
 
-    @PostMapping("/salvaDatiPatente")
-    public String datiPatente(@RequestBody Tassista datitas){
-       try{
 
-           Tassista t = new Tassista();
-           t.setEmail(datitas.getEmail());
-           t.setNome(datitas.getNome());
-           t.setCognome(datitas.getCognome());
-           t.setnPatente(datitas.getnPatente());
-           t.setScadenza(datitas.getScadenza());
-           t.setTarga(datitas.getTarga());
-           Tasrepository.save(t);
-           return "OK, Dati aggiornati correttamente";
-       }catch(Exception e){
-           return "Qualcosa è andato storto :(" + e.getMessage()+"--->"+datitas.toString();
-       }
-    }
 
 
 }
