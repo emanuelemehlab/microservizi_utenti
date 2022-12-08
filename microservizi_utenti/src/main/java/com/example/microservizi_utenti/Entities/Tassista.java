@@ -1,12 +1,13 @@
 package com.example.microservizi_utenti.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.List;
+import java.util.Set;
 
 
 @Entity
-@Table(name = "tassista")
+    @Table(name = "tassista")
 public class Tassista {
     @Id
     private String email;
@@ -19,7 +20,16 @@ public class Tassista {
 
     private String scadenza;
 
-    private String targa;
+
+    @OneToOne(mappedBy = "tassista", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Disponibilita disponibilita;
+
+    @OneToOne(mappedBy = "tassista", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Automobile auto;
+
+
 
     public String getnPatente() {
         return nPatente;
@@ -37,13 +47,6 @@ public class Tassista {
         this.scadenza = scadenza;
     }
 
-    public String getTarga() {
-        return targa;
-    }
-
-    public void setTarga(String targa) {
-        this.targa = targa;
-    }
 
     public Tassista(String email, String nome, String cognome) {
         this.email = email;
@@ -66,13 +69,12 @@ public class Tassista {
         return nome;
     }
 
-    public Tassista(String email, String nome, String cognome, String nPatente, String scadenza, String targa) {
+    public Tassista(String email, String nome, String cognome, String nPatente, String scadenza) {
         this.email = email;
         this.nome = nome;
         this.cognome = cognome;
         this.nPatente = nPatente;
         this.scadenza = scadenza;
-        this.targa = targa;
     }
 
     public void setNome(String nome) {
@@ -95,7 +97,6 @@ public class Tassista {
                 ", cognome='" + cognome + '\'' +
                 ", nPatente='" + nPatente + '\'' +
                 ", scadenza=" + scadenza +
-                ", targa='" + targa + '\'' +
                 '}';
     }
 }

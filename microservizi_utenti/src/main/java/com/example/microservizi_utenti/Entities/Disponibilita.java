@@ -1,8 +1,6 @@
 package com.example.microservizi_utenti.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "disponibilita")
@@ -12,6 +10,10 @@ public class Disponibilita {
     private String email;
 
     private String disponibilita;
+
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "email", nullable = false)
+    private Tassista tassista;
 
     public Disponibilita(String email, String disponibilita) {
         this.email = email;

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -113,7 +114,6 @@ public class ControllerAPI {
             t.setCognome(datitas.getCognome());
             t.setnPatente(datitas.getnPatente());
             t.setScadenza(datitas.getScadenza());
-            t.setTarga(datitas.getTarga());
             Tasrepository.save(t);
             return "OK, Dati aggiornati correttamente";
         }catch(Exception e){
@@ -131,6 +131,31 @@ public class ControllerAPI {
        }
     }
 
+    @GetMapping("/getAutomobile/{email}")
+    public ResponseEntity<Automobile> getAutomobile(@PathVariable("email") String email){
+        try{
+            for (Automobile auto : Autorepository.findAll()) {
+                if (auto.getTassista().getEmail().equals(email)) {
+                    return new ResponseEntity<>(auto,HttpStatus.OK);
+                }
+            }
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.valueOf(e.getMessage()));
+        }
+    }
+
+    @DeleteMapping("/deleteAutomobile/{targa}")
+    public String deleteAutomobile(@PathVariable("targa") String targa) {
+        try {
+            Autorepository.deleteById(targa);
+            return "Cancellazione automobile con targa:" + targa+" effettuata.";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
     @PutMapping("/disponibilita")
     public String disponibilita(@RequestBody Disponibilita disp){
         try{
@@ -141,16 +166,42 @@ public class ControllerAPI {
         }
     }
 
+    @DeleteMapping("/deleteDisponibilita/{email}")
+    public String deleteDisponibilita(@PathVariable("email") String email){
+       try{
+           Disprepository.deleteById(email);
+           return "Cancellazione disponibilità per "+email+" effettuata.";
+       }catch(Exception e){
+           return e.getMessage();
+       }
+
+    }
+
+
+    @GetMapping("/getDispTassista/{email}")
+    public String getDispTassista(@PathVariable("email") String email){
+        Iterator<Disponibilita> it = Disprepository.findAll().iterator();
+        while(it.hasNext()){
+            Disponibilita disp = it.next();
+            if(disp.getEmail().equals(email)){
+                return disp.getDisponibilita();
+            }
+        }
+        return "Email non presente del db.";
+    }
+
     @GetMapping("/getDisponibilita/{giorno}/{orario}")
     public List<String> getDisponibilita(@PathVariable("giorno") String giorno,@PathVariable("orario") String orario){
         Iterator<Disponibilita> it =  Disprepository.findAll().iterator();
-        List<String> tassisti = null;
+        List<String> tassisti = new ArrayList<String>();
         while(it.hasNext()){
             Disponibilita disptas = it.next();
             String disp = disptas.getDisponibilita();
             JSONObject json = new JSONObject(disp);
             try{
-                String[] ora = json.getString(giorno).split(",");
+                String[] ora = json.getJSONArray(giorno).toString().replace("[","").replace("]","").split(",");
+
+
                 for(int i=0;i< ora.length;i++){
                     if(orario.equals(ora[i])){
                         tassisti.add(disptas.getEmail());

@@ -1,8 +1,6 @@
 package com.example.microservizi_utenti.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "automobile")
@@ -14,20 +12,34 @@ public class Automobile {
 
     private int nPosti;
 
-    private Boolean bagliaio;
+    private Boolean bagagliaio;
 
     private Boolean seggiolino;
 
-    public Automobile(String targa, String descrizione, int nPosti, Boolean bagliaio, Boolean seggiolino) {
+    @OneToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "email_tas", nullable = false)
+    private Tassista tassista;
+
+    public Automobile(String targa, String descrizione, int nPosti, Boolean bagagliaio, Boolean seggiolino, Tassista tassista) {
         this.targa = targa;
         this.descrizione = descrizione;
         this.nPosti = nPosti;
-        this.bagliaio = bagliaio;
+        this.bagagliaio = bagagliaio;
         this.seggiolino = seggiolino;
+        this.tassista = tassista;
     }
+
 
     public Automobile() {
 
+    }
+
+    public Tassista getTassista() {
+        return tassista;
+    }
+
+    public void setTassista(Tassista tassista) {
+        this.tassista = tassista;
     }
 
     public String getTarga() {
@@ -54,12 +66,12 @@ public class Automobile {
         this.nPosti = nPosti;
     }
 
-    public Boolean getBagliaio() {
-        return bagliaio;
+    public Boolean getBagagliaio() {
+        return bagagliaio;
     }
 
-    public void setBagliaio(Boolean bagliaio) {
-        this.bagliaio = bagliaio;
+    public void setBagagliaio(Boolean bagagliaio) {
+        this.bagagliaio = bagagliaio;
     }
 
     public Boolean getSeggiolino() {
@@ -76,8 +88,9 @@ public class Automobile {
                 "targa='" + targa + '\'' +
                 ", descrizione='" + descrizione + '\'' +
                 ", nPosti=" + nPosti +
-                ", bagliaio=" + bagliaio +
+                ", bagagliaio=" + bagagliaio +
                 ", seggiolino=" + seggiolino +
+                ", tassista=" + tassista +
                 '}';
     }
 }
