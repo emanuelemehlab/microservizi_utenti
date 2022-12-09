@@ -21,11 +21,11 @@ public class Tassista {
     private String scadenza;
 
 
-    @OneToOne(mappedBy = "tassista", fetch = FetchType.LAZY,
+    @OneToOne(mappedBy = "tassista", fetch = FetchType.EAGER,
             cascade = CascadeType.ALL)
     private Disponibilita disponibilita;
 
-    @OneToOne(mappedBy = "tassista", fetch = FetchType.LAZY,
+    @OneToOne(mappedBy = "tassista", fetch = FetchType.EAGER,
             cascade = CascadeType.ALL)
     private Automobile auto;
 
@@ -99,4 +99,6 @@ public class Tassista {
                 ", scadenza=" + scadenza +
                 '}';
     }
+
+
 }
