@@ -217,7 +217,7 @@ public class ControllerAPI {
     }
 
     @GetMapping("/getAllInfoTassisti/{email}")
-    public List<Tassista> getAllInfoTassisti(@PathVariable("email") String email){
+    public List<Object> getAllInfoTassisti(@PathVariable("email") String email){
         return Tasrepository.findByEmail(email);
     }
 
