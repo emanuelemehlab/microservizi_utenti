@@ -99,4 +99,6 @@ public class Tassista {
                 ", scadenza=" + scadenza +
                 '}';
     }
+
+
 }
