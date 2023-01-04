@@ -24,6 +24,16 @@ public class prenotazione {
 
     private Integer pagamento;
 
+    private float prezzo;
+
+    public float getPrezzo() {
+        return prezzo;
+    }
+
+    public void setPrezzo(float prezzo) {
+        this.prezzo = prezzo;
+    }
+
     private String stato;
 
     private String cliente;
