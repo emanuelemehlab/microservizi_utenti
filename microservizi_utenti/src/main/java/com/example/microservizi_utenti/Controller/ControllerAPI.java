@@ -191,7 +191,7 @@ public class ControllerAPI {
     }
 
     @GetMapping("/getDisponibilita/{giorno}/{orario}")
-    public List<String> getDisponibilita(@PathVariable("giorno") String giorno,@PathVariable("orario") String orario){
+    public List<Object> getDisponibilita(@PathVariable("giorno") String giorno,@PathVariable("orario") String orario){
         Iterator<Disponibilita> it =  Disprepository.findAll().iterator();
         List<String> tassisti = new ArrayList<String>();
         while(it.hasNext()){
@@ -213,12 +213,14 @@ public class ControllerAPI {
             }
 
         }
-        return tassisti;
+        return Tasrepository.findAllInfo(tassisti);
+
     }
 
-    @GetMapping("/getAllInfoTassisti/{email}")
-    public List<Object> getAllInfoTassisti(@PathVariable("email") String email){
+    @GetMapping("/getAllInfoTassista/{email}")
+    public List<Object> getAllInfoTassista(@PathVariable("email") String email){
         return Tasrepository.findByEmail(email);
     }
+
 
 }

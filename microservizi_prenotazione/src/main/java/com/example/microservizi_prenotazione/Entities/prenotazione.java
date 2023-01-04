@@ -3,7 +3,7 @@ package com.example.microservizi_prenotazione.Entities;
 import jakarta.persistence.*;
 
 @Entity
-public class ricercaprenotazione {
+public class prenotazione {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
@@ -23,6 +23,56 @@ public class ricercaprenotazione {
     private Boolean bagagliaio;
 
     private Integer pagamento;
+
+    private float prezzo;
+
+    public float getPrezzo() {
+        return prezzo;
+    }
+
+    public void setPrezzo(float prezzo) {
+        this.prezzo = prezzo;
+    }
+
+    private String stato;
+
+    private String cliente;
+
+    private String tassista;
+
+    private String codice;
+
+    public String getCodice() {
+        return codice;
+    }
+
+    public void setCodice(String codice) {
+        this.codice = codice;
+    }
+
+    public String getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
+    }
+
+    public String getTassista() {
+        return tassista;
+    }
+
+    public void setTassista(String tassista) {
+        this.tassista = tassista;
+    }
+
+    public String getStato() {
+        return stato;
+    }
+
+    public void setStato(String stato) {
+        this.stato = stato;
+    }
 
     public Long getId() {
         return id;
