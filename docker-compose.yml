@@ -6,6 +6,8 @@ services:
     image: postgres:alpine
     ports:
       - "5431:5431"
+    expose:
+      - "5431"
     environment:
       POSTGRES_DB: db
       POSTGRES_USER: postgres
