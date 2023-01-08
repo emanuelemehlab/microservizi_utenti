@@ -1,5 +1,14 @@
 version: "3"
 services:
+  db-user:
+    build: .
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
   microservice-users:
     build: .
     image: pievit/microservizi_utenti
