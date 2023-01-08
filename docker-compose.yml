@@ -2,6 +2,7 @@ version: '1'
 
 services:
   db-users:
+    container_name: db-users
     image: postgres:alpine
     ports:
       - "5432:5432"
@@ -16,7 +17,7 @@ services:
     tty: true
     build:
       context: .
-    container_name: app
+    container_name: microservizi_utenti
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db-users:5432/db
       - SPRING_DATASOURCE_USERNAME=postgres
