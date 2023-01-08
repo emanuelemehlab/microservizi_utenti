@@ -3,7 +3,7 @@ services:
   db-users:
     image: postgres:latest
     ports:
-      - "5432:5432"
+      - "5432:5431"
     environment:
       POSTGRES_DB: db
       POSTGRES_USER: postgres
