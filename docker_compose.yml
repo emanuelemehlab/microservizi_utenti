@@ -5,5 +5,3 @@ services:
     image: pievit/microservizi_utenti
     ports:
       - "8080:8080"
-    depends_on:
-      - db-users
