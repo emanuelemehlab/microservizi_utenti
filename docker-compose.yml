@@ -12,6 +12,7 @@ services:
       POSTGRES_DB: db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
+    command: -p 5433
   microservizi_utenti:
     image: pievit/microservizi_utenti
     stdin_open: true
