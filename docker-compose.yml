@@ -5,13 +5,11 @@ services:
     container_name: db-users
     image: postgres:alpine
     ports:
-      - "5432:5432"
+      - "5432:5431"
     environment:
       POSTGRES_DB: db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-    expose:
-      - "5432"
   microservizi_utenti:
     image: pievit/microservizi_utenti
     stdin_open: true
@@ -20,7 +18,7 @@ services:
       context: .
     container_name: microservizi_utenti
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db-users:5432/db
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db-users:5431/db
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=password
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
