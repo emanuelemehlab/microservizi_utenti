@@ -10,8 +10,10 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
 
-  app:
+  microservizi_utenti:
     image: pievit/microservizi_utenti
+    stdin_open: true
+    tty: true
     build:
       context: .
     container_name: app
