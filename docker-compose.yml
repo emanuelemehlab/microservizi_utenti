@@ -10,7 +10,8 @@ services:
       POSTGRES_DB: db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-
+    expose:
+      - "5432"
   microservizi_utenti:
     image: pievit/microservizi_utenti
     stdin_open: true
