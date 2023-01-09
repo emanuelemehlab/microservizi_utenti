@@ -18,10 +18,8 @@ public class MicroserviziUtentiApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping(".*")
-						.allowedOrigins(".*")
-						.allowedMethods("GET")
-						.allowCredentials(false);
+				registry.addMapping("/api/v1/**")
+						.allowedOrigins("http://localhost:8082");
 			}
 		};
 	}
