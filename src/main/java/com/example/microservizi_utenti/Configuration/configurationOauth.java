@@ -32,7 +32,7 @@ public class configurationOauth {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/api/v1/**").allowedOrigins("http://localhost:8082");
+                registry.addMapping("/api/v1/.*").allowedOriginPatterns(".*");
             }
         };
     }
