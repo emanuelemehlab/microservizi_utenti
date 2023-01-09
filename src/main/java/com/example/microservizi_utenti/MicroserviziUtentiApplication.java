@@ -18,7 +18,7 @@ public class MicroserviziUtentiApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/api/v1/**")
+				registry.addMapping("http://localhost:8080/api/v1/**")
 						.allowedOrigins("http://localhost:8082");
 			}
 		};
