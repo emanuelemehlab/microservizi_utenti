@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: microservizi-utenti
-          image: pievti/microservizi-utenti:latest
+          image: pievit/microservizi-utenti:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8081
@@ -34,4 +34,4 @@ spec:
     - protocol: TCP
       port: 8081
       targetPort: 8081
-  type: LoadBalancer
+  type: NodePort
