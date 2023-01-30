@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: miscroservizi_utenti
+  name: microservizi_utenti
   labels:
-    app: miscroservizi_utenti
+    app: microservizi_utenti
   namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: miscroservizi_utenti
+      app: microservizi_utenti
   template:
     metadata:
       labels:
-        app: miscroservizi_utenti
+        app: microservizi_utenti
     spec:
       containers:
-        - name: miscroservizi_utenti
-          image: miscroservizi_utenti:latest
+        - name: microservizi_utenti
+          image: pievit/microservizi_utenti:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8081
@@ -25,11 +25,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: miscroservizi_utenti
+  name: microservizi_utenti
   namespace: default
 spec:
   selector:
-    app: miscroservizi_utenti
+    app: microservizi_utenti
   ports:
     - protocol: TCP
       port: 8081
