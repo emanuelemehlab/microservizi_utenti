@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: microservizi-utenti
-          image: microservizi-utenti:latest
+          image: pievti/microservizi-utenti:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8081
