@@ -14,12 +14,12 @@ services:
       POSTGRES_PASSWORD: password
     command: -p 5431
   microservizi_utenti:
-    image: pievit/microservizi_utenti
+    image: pievit/microservizi-utenti
     stdin_open: true
     tty: true
     build:
       context: .
-    container_name: microservizi_utenti
+    container_name: microservizi-utenti
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db-users:5431/db
       - SPRING_DATASOURCE_USERNAME=postgres

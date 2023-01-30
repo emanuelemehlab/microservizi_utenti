@@ -16,8 +16,8 @@ spec:
         app: microservizi-utenti
     spec:
       containers:
-        - name: microservizi_utenti
-          image: pievit/microservizi_utenti:latest
+        - name: microservizi-utenti
+          image: pievit/microservizi-utenti:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8081
