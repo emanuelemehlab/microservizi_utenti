@@ -6,7 +6,7 @@ metadata:
     app: microservizi-utenti
   namespace: default
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: microservizi-utenti
@@ -27,12 +27,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: microservizi-utenti
-  namespace: default
 spec:
   selector:
     app: microservizi-utenti
   ports:
-    - protocol: TCP
+    - protocol: "TCP"
       port: 8081
       targetPort: 8081
   type: NodePort
