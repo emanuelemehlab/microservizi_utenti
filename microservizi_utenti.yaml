@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: microservizi_utenti
+  name: microservizi-utenti
   labels:
-    app: microservizi_utenti
+    app: microservizi-utenti
   namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: microservizi_utenti
+      app: microservizi-utenti
   template:
     metadata:
       labels:
-        app: microservizi_utenti
+        app: microservizi-utenti
     spec:
       containers:
         - name: microservizi_utenti
@@ -25,11 +25,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: microservizi_utenti
+  name: microservizi-utenti
   namespace: default
 spec:
   selector:
-    app: microservizi_utenti
+    app: microservizi-utenti
   ports:
     - protocol: TCP
       port: 8081
