@@ -20,9 +20,9 @@ spec:
             - name: POSTGRES_DB
               value: db
             - name: POSTGRES_PASSWORD
-              value: postgres
-            - name: POSTGRES_USER
               value: password
+            - name: POSTGRES_USER
+              value: postgres
           image: postgres:alpine
           name: db-users
           ports:
