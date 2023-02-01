@@ -2,18 +2,16 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: microservizi-utenti
-  labels:
-    io.kompose.service: microservizi-utenti
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: microservizi-utenti
+      app: microservizi-utenti
   strategy: { }
   template:
     metadata:
       labels:
-        io.kompose.service: microservizi-utenti
+        app: microservizi-utenti
     spec:
       containers:
         - name: microservizi-utenti
@@ -27,7 +25,7 @@ spec:
             - name: SPRING_JPA_HIBERNATE_DDL_AUTO
               value: update
           image: pievit/microservizi-utenti:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           resources: { }
@@ -36,13 +34,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  labels:
-    io.kompose.service: microservice-users
   name: microservizi-utenti
 spec:
   selector:
-    io.kompose.service: microservizi-utenti
+    app: microservizi-utenti
   ports:
-    - name: api
-      port: 8080
-      targetPort: 8080
+    - port: 8080

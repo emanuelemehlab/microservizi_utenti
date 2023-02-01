@@ -1,45 +1,83 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  labels:
+    app: postgres
+data:
+  POSTGRES_DB: db
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: password
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: postgres-pv-volume  # Sets PV's name
+  labels:
+    type: local  # Sets PV's type to local
+    app: postgres
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 256Mi # Sets PV Volume
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/mnt/data"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: postgres-pv-claim  # Sets name of PVC
+  labels:
+    app: postgres
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany  # Sets read and write access
+  resources:
+    requests:
+      storage: 256Mi  # Sets volume size
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    io.kompose.service: db-users
-  name: db-users
+  name: postgres  # Sets Deployment name
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: db-users
-  strategy: { }
+      app: postgres
   template:
     metadata:
       labels:
-        io.kompose.service: db-users
+        app: postgres
     spec:
       containers:
-        - env:
-            - name: POSTGRES_DB
-              value: db
-            - name: POSTGRES_PASSWORD
-              value: password
-            - name: POSTGRES_USER
-              value: postgres
-          image: postgres:alpine
-          name: db-users
+        - name: postgres
+          image: postgres:alpine # Sets Image
           ports:
-            - containerPort: 5432
-          resources: { }
-      restartPolicy: Always
+            - containerPort: 5432  # Exposes container port
+          envFrom:
+            - configMapRef:
+                name: postgres-config
+          volumeMounts:
+            - mountPath: /data/db
+              name: postgredb
+      volumes:
+        - name: postgredb
+          persistentVolumeClaim:
+            claimName: postgres-pv-claim
 ---
 apiVersion: v1
 kind: Service
 metadata:
+  name: postgres # Sets service name
   labels:
-    io.kompose.service: db-users
-  name: db-users
+    app: postgres # Labels and Selectors
 spec:
   ports:
-    - name: jdbc
-      port: 5432
+    - port: 5432
       targetPort: 5432
   selector:
-    io.kompose.service: db-users
+    app: postgres
