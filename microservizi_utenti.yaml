@@ -37,3 +37,4 @@ spec:
     app: microservizi-utenti
   ports:
     - port: 8080
+      targetPort: 8080
