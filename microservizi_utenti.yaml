@@ -20,7 +20,7 @@ spec:
             - name: SPRING_DATASOURCE_USERNAME
               value: postgres
             - name: SPRING_DATASOURCE_PASSWORD
-              value: password
+              value: password.
             - name: SPRING_JPA_HIBERNATE_DDL_AUTO
               value: update
           image: pievit/microservizi-utenti:latest
