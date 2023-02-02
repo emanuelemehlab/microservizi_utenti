@@ -16,7 +16,7 @@ spec:
         - name: microservizi-utenti
           env:
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://db-users:5432/db
+              value: 10.101.254.132:5432/db
             - name: SPRING_DATASOURCE_USERNAME
               value: postgres
             - name: SPRING_DATASOURCE_PASSWORD
