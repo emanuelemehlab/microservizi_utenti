@@ -63,6 +63,21 @@ public class Controller {
         }
     }
 
+    @GetMapping("/oauth2/authorization/google?{continue}")
+    public RedirectView redirectlogin(@PathVariable("continue") String cont,@CookieValue(name = "Path") String path) {
+        try{
+            if(path.equals("loginCliente")){
+                return new RedirectView("/loginCliente");
+            } else if (path.equals("loginTassista")) {
+                return new RedirectView("/loginTassista");
+            }else{
+                return new RedirectView(path);
+            }
+        }catch(Exception e){
+            return new RedirectView(path);
+        }
+    }
+
     @GetMapping("/iscrizioneTassista")
     public ModelAndView iscrTas(@AuthenticationPrincipal OAuth2User principal){
         Tassista t = new Tassista(principal.getAttribute("email"),principal.getAttribute("given_name"),principal.getAttribute("family_name"));
