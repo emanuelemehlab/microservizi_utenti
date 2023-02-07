@@ -149,8 +149,23 @@ public class ControllerAPI {
     @DeleteMapping("/deleteAutomobile/{targa}")
     public String deleteAutomobile(@PathVariable("targa") String targa) {
         try {
-            Autorepository.deleteById(targa);
-            return "Cancellazione automobile con targa:" + targa+" effettuata.";
+//            Autorepository.deleteById(targa);
+//            return "Cancellazione automobile con targa:" + targa+" effettuata.";
+
+            Boolean flag = false;
+            Iterator<Automobile> it =  Autorepository.findAll().iterator();
+            while(it.hasNext()){
+                if(it.next().getTarga().equals(targa)){
+                    Autorepository.delete(it.next());
+                    flag = true;
+                    break;
+                }
+            }
+            if(flag){
+                return "Atomobile con targa :"+targa+" cancellata.";
+            }else{
+                return "Errore: Automobile non esistente.";
+            }
         } catch (Exception e) {
             return e.getMessage();
         }
@@ -169,8 +184,24 @@ public class ControllerAPI {
     @DeleteMapping("/deleteDisponibilita/{email}")
     public String deleteDisponibilita(@PathVariable("email") String email){
        try{
-           Disprepository.deleteById(email);
-           return "Cancellazione disponibilità per "+email+" effettuata.";
+//           Disprepository.deleteById(email);
+//           return "Cancellazione disponibilità per "+email+" effettuata.";
+
+           Boolean flag = false;
+           Iterator<Disponibilita> it =  Disprepository.findAll().iterator();
+           while(it.hasNext()){
+               if(it.next().getEmail().equals(email)){
+                   Disprepository.delete(it.next());
+                   flag = true;
+                   break;
+               }
+           }
+           if(flag){
+               return "Disponibilità di "+email+" cancellata correttamente.";
+           }else{
+               return "Nessuna Disponibilità.";
+           }
+
        }catch(Exception e){
            return e.getMessage();
        }
