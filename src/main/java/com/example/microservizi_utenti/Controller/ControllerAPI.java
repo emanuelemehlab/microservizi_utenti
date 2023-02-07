@@ -159,7 +159,8 @@ public class ControllerAPI {
             while(it.hasNext()){
                 Automobile auto = it.next();
                 if(auto.getTarga().equals(targa)){
-                    Autorepository.delete(auto);
+//                    return auto.toString();
+                    Autorepository.deleteById(auto.getTarga());
                     flag = true;
                     break;
                 }
