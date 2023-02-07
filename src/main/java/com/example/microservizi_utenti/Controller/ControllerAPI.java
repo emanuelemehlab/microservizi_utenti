@@ -39,8 +39,9 @@ public class ControllerAPI {
             Boolean flag = false;
             Iterator<Cliente> it =  Clirepository.findAll().iterator();
             while(it.hasNext()){
-                if(it.next().getEmail().equals(email)){
-                    Clirepository.delete(it.next());
+                Cliente cli = it.next();
+                if(cli.getEmail().equals(email)){
+                    Clirepository.delete(cli);
                     flag = true;
                     break;
                 }
@@ -64,8 +65,9 @@ public class ControllerAPI {
             Boolean flag = false;
             Iterator<Tassista> it =  Tasrepository.findAll().iterator();
             while(it.hasNext()){
-                if(it.next().getEmail().equals(email)){
-                    Tasrepository.delete(it.next());
+                Tassista tas = it.next();
+                if(tas.getEmail().equals(email)){
+                    Tasrepository.delete(tas);
                     flag = true;
                     break;
                 }
@@ -155,8 +157,9 @@ public class ControllerAPI {
             Boolean flag = false;
             Iterator<Automobile> it =  Autorepository.findAll().iterator();
             while(it.hasNext()){
-                if(it.next().getTarga().equals(targa)){
-                    Autorepository.delete(it.next());
+                Automobile auto = it.next();
+                if(auto.getTarga().equals(targa)){
+                    Autorepository.delete(auto);
                     flag = true;
                     break;
                 }
@@ -190,8 +193,9 @@ public class ControllerAPI {
            Boolean flag = false;
            Iterator<Disponibilita> it =  Disprepository.findAll().iterator();
            while(it.hasNext()){
-               if(it.next().getEmail().equals(email)){
-                   Disprepository.delete(it.next());
+               Disponibilita disp = it.next();
+               if(disp.getEmail().equals(email)){
+                   Disprepository.delete(disp);
                    flag = true;
                    break;
                }
