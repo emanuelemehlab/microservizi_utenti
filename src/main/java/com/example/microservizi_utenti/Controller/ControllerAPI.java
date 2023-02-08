@@ -222,7 +222,7 @@ public class ControllerAPI {
                 return disp.getDisponibilita();
             }
         }
-        return "Email non presente del db.";
+        return "Nessuna disponibilità per: "+email;
     }
 
     @GetMapping("/getDisponibilita/{giorno}/{orario}")
