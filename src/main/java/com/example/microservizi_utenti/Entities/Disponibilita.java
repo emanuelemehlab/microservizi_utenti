@@ -11,7 +11,7 @@ public class Disponibilita {
 
     private String disponibilita;
 
-    @OneToOne(fetch = FetchType.EAGER, optional = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "email", nullable = false)
     private Tassista tassista;
 
