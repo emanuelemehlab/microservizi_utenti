@@ -19,7 +19,7 @@ metadata:
 spec:
   storageClassName: manual
   capacity:
-    storage: 256Mi # Sets PV Volume
+    storage: 256M # Sets PV Volume
   accessModes:
     - ReadWriteMany
   hostPath:
@@ -37,7 +37,7 @@ spec:
     - ReadWriteMany  # Sets read and write access
   resources:
     requests:
-      storage: 256Mi  # Sets volume size
+      storage: 256M  # Sets volume size
 ---
 apiVersion: apps/v1
 kind: Deployment
