@@ -16,7 +16,7 @@ public class Automobile {
 
     private Boolean seggiolino;
 
-    @OneToOne(fetch = FetchType.EAGER, optional = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "email_tas", nullable = false)
     private Tassista tassista;
 
