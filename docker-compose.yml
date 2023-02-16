@@ -4,6 +4,7 @@ services:
   db-users:
     container_name: db-users
     image: postgres:alpine
+    network_mode: bridge
     ports:
       - "5431:5431"
     expose:
