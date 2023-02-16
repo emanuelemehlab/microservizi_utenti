@@ -39,6 +39,13 @@ public class Controller {
         return "loggato come cliente: "+principal.getAttribute("name");
     }
 
+    @GetMapping("/getMailLogged")
+    public String getMailLogged(@AuthenticationPrincipal OAuth2User principal) {
+
+        return principal.getAttribute("email");
+    }
+
+
     @GetMapping("/loginTassista")
     public String tassista(@AuthenticationPrincipal OAuth2User principal) {
         Tassista t = new Tassista(principal.getAttribute("email"),principal.getAttribute("given_name"),principal.getAttribute("family_name"));
