@@ -26,7 +26,7 @@ public class Controller {
         return "Hello World";
     }
     @GetMapping("/loginCliente")
-    public String cliente(@AuthenticationPrincipal OAuth2User principal) {
+    public RedirectView cliente(@AuthenticationPrincipal OAuth2User principal) {
         Cliente c = new Cliente(principal.getAttribute("email"),principal.getAttribute("given_name"),principal.getAttribute("family_name"));
         try{
             if(!Clirepository.findAll().contains(c))
@@ -35,8 +35,10 @@ public class Controller {
             Clirepository.save(c);
         }
 
-
-        return "loggato come cliente: "+principal.getAttribute("name");
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("/homeCliente");
+        return redirectView;
+//        return "loggato come cliente: "+principal.getAttribute("name");
     }
 
     @GetMapping("/getMailLogged")
