@@ -88,6 +88,8 @@ public class Controller {
         }
     }
 
+
+
     @GetMapping("/iscrizioneTassista")
     public ModelAndView iscrTas(@AuthenticationPrincipal OAuth2User principal){
         Tassista t = new Tassista(principal.getAttribute("email"),principal.getAttribute("given_name"),principal.getAttribute("family_name"));
