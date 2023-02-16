@@ -15,6 +15,7 @@ services:
     command: -p 5431
   microservizi_utenti:
     image: pievit/microservizi-utenti
+    network_mode: bridge
     stdin_open: true
     tty: true
     build:
