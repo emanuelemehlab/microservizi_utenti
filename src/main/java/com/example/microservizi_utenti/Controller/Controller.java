@@ -35,6 +35,7 @@ public class Controller {
             Clirepository.save(c);
         }
 
+
         return "loggato come cliente: "+principal.getAttribute("name");
     }
 
