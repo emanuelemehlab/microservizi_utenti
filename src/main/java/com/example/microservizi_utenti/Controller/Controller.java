@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpSession;
+
 @CrossOrigin
 @RestController
 public class Controller {
@@ -26,7 +28,7 @@ public class Controller {
         return "Hello World";
     }
     @GetMapping("/loginCliente")
-    public RedirectView cliente(@AuthenticationPrincipal OAuth2User principal) {
+    public RedirectView cliente(@AuthenticationPrincipal OAuth2User principal, HttpSession session) {
         Cliente c = new Cliente(principal.getAttribute("email"),principal.getAttribute("given_name"),principal.getAttribute("family_name"));
         try{
             if(!Clirepository.findAll().contains(c))
@@ -35,6 +37,7 @@ public class Controller {
             Clirepository.save(c);
         }
 
+        session.setAttribute("email",principal.getAttribute("email"));
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl("/homeCliente");
         return redirectView;
