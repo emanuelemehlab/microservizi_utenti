@@ -23,7 +23,7 @@ services:
       context: .
     container_name: microservizi-utenti
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db-users:5431/db
+      SPRING_DATASOURCE_URL: jdbc:postgresql://172.17.0.3:5431/db
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: password
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
