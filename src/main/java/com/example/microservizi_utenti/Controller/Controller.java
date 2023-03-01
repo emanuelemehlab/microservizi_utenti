@@ -4,6 +4,7 @@ import com.example.microservizi_utenti.Entities.Cliente;
 import com.example.microservizi_utenti.Entities.ClienteRepository;
 import com.example.microservizi_utenti.Entities.Tassista;
 import com.example.microservizi_utenti.Entities.TassistaRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -26,7 +27,7 @@ public class Controller {
         return "Hello World";
     }
     @GetMapping("/loginCliente")
-    public RedirectView cliente(@AuthenticationPrincipal OAuth2User principal) {
+    public RedirectView cliente(@AuthenticationPrincipal OAuth2User principal, HttpSession session) {
         Cliente c = new Cliente(principal.getAttribute("email"),principal.getAttribute("given_name"),principal.getAttribute("family_name"));
         try{
             if(!Clirepository.findAll().contains(c))
@@ -35,6 +36,7 @@ public class Controller {
             Clirepository.save(c);
         }
 
+        session.setAttribute("email",principal.getAttribute("email"));
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl("/homeCliente");
         return redirectView;
