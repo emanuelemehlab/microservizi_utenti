@@ -94,8 +94,9 @@ public class ControllerAPI {
 
             Iterator<Tassista> it =  Tasrepository.findAll().iterator();
             while(it.hasNext()){
-                if(it.next().getEmail().equals(email)){
-                    return new ResponseEntity<>(it.next(), HttpStatus.OK);
+                Tassista tas = it.next();
+                if(tas.getEmail().equals(email)){
+                    return new ResponseEntity<>(tas, HttpStatus.OK);
                 }
             }
 
