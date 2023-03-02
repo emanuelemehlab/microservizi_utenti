@@ -51,27 +51,40 @@ public class Controller {
 
 
     @GetMapping("/loginTassista")
-    public String tassista(@AuthenticationPrincipal OAuth2User principal) {
+    public RedirectView tassista(@AuthenticationPrincipal OAuth2User principal) {
         Tassista t = new Tassista(principal.getAttribute("email"),principal.getAttribute("given_name"),principal.getAttribute("family_name"));
         try{
             if(!Tasrepository.existsById(t.getEmail())) {
                 Tasrepository.save(t);
 //                return new RedirectView("iscrizioneTassista");
-                return "Primo passo iscrizione tassista effettuato.";
+//                return "Primo passo iscrizione tassista effettuato.";
+                RedirectView redirectView = new RedirectView();
+                redirectView.setUrl("/modificaDatiTas");
+                return redirectView;
+
             }else{
                 if(Tasrepository.findAll().contains(t)){
 //                    return new RedirectView("iscrizioneTassista");
-                    return "Primo passo iscrizione tassista già effettuato.";
+//                    return "Primo passo iscrizione tassista già effettuato.";
+                    RedirectView redirectView = new RedirectView();
+                    redirectView.setUrl("/modificaDatiTas");
+                    return redirectView;
                 }else{
 //                    return new RedirectView("tassistaHome");
-                    return "Login effettuato";
+//                    return "Login effettuato";
+                    RedirectView redirectView = new RedirectView();
+                    redirectView.setUrl("/homeTassista");
+                    return redirectView;
                 }
 
             }
         }catch(Exception e){
             Tasrepository.save(t);
 //            return new RedirectView("iscrizioneTassista");
-            return e.getMessage();
+//            return e.getMessage();
+            RedirectView redirectView = new RedirectView();
+            redirectView.setUrl("/error404");
+            return redirectView;
         }
     }
 
