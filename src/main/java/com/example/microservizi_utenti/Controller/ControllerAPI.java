@@ -102,7 +102,7 @@ public class ControllerAPI {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         }catch(Exception e){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
