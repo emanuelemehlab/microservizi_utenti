@@ -134,6 +134,18 @@ public class ControllerAPI {
        }
     }
 
+    @PostMapping("/salvaDatiTas")
+    public String salvaDatiTas(@RequestBody Tassista tassista,@RequestBody Automobile auto){
+        try{
+            salvaDatiPatente(tassista);
+            automobile(auto);
+            return "Dati salvati correttamente.";
+        }catch(Exception e){
+            return e.getMessage();
+        }
+
+    }
+
     @GetMapping("/getAutomobile/{email}")
     public ResponseEntity<Automobile> getAutomobile(@PathVariable("email") String email){
         try{
