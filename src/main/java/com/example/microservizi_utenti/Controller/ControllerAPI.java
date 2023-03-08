@@ -1,6 +1,7 @@
 package com.example.microservizi_utenti.Controller;
 
 import com.example.microservizi_utenti.Entities.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.json.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -146,7 +147,9 @@ public class ControllerAPI {
 //            salvaDatiPatente(tassista);
 //            automobile(auto);
 //            return "Dati salvati correttamente.";
-            System.out.println(map.get("tassista"));
+            System.out.println(map.get("tassista").asText());
+//            ObjectMapper mapper = new ObjectMapper();
+//            Tassista tassista = mapper.readValue(map.get("tassista").asText(), Tassista.class);
             return map.get("tassista").asText();
         }catch(Exception e){
             return e.getMessage();
