@@ -1,6 +1,7 @@
 package com.example.microservizi_utenti.Controller;
 
 import com.example.microservizi_utenti.Entities.*;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.json.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -135,8 +137,10 @@ public class ControllerAPI {
     }
 
     @PostMapping("/salvaDatiTas")
-    public String salvaDatiTas(@RequestBody Tassista tassista,@RequestBody Automobile auto){
+    public String salvaDatiTas(@RequestBody ObjectNode map){
         try{
+            Tassista tassista = (Tassista) (Object) map.get("tassista");
+            Automobile auto = (Automobile) (Object) map.get("automobile");
             salvaDatiPatente(tassista);
             automobile(auto);
             return "Dati salvati correttamente.";
