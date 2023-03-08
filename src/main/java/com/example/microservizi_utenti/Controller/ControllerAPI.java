@@ -141,17 +141,12 @@ public class ControllerAPI {
     @PostMapping("/salvaDatiTas")
     public String salvaDatiTas(@RequestBody ObjectNode map){
         try{
-
-//            Tassista tassista = (Tassista) (Object) map.get("tassista");
-//            Automobile auto = (Automobile) (Object) map.get("automobile");
-//            salvaDatiPatente(tassista);
-//            automobile(auto);
-//            return "Dati salvati correttamente.";
-            String str = map.get("tassista").toString();
-            System.out.println(str);
-//            ObjectMapper mapper = new ObjectMapper();
-//            Tassista tassista = mapper.readValue(map.get("tassista").asText(), Tassista.class);
-            return map.get("tassista").asText();
+            ObjectMapper mapper = new ObjectMapper();
+            Tassista tassista = mapper.readValue(map.get("tassista").toString(), Tassista.class);
+            Automobile auto = mapper.readValue(map.get("automobile").toString(), Automobile.class);
+            salvaDatiPatente(tassista);
+            automobile(auto);
+            return "Dati salvati correttamente.";
         }catch(Exception e){
             return e.getMessage();
         }
