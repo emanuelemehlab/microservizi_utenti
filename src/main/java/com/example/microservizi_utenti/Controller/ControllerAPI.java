@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+
 @CrossOrigin
 @RestController
 @RequestMapping("/api/v1")
@@ -139,11 +140,13 @@ public class ControllerAPI {
     @PostMapping("/salvaDatiTas")
     public String salvaDatiTas(@RequestBody ObjectNode map){
         try{
-            Tassista tassista = (Tassista) (Object) map.get("tassista");
-            Automobile auto = (Automobile) (Object) map.get("automobile");
-            salvaDatiPatente(tassista);
-            automobile(auto);
-            return "Dati salvati correttamente.";
+
+//            Tassista tassista = (Tassista) (Object) map.get("tassista");
+//            Automobile auto = (Automobile) (Object) map.get("automobile");
+//            salvaDatiPatente(tassista);
+//            automobile(auto);
+//            return "Dati salvati correttamente.";
+            return map.get("tassista").asText();
         }catch(Exception e){
             return e.getMessage();
         }
