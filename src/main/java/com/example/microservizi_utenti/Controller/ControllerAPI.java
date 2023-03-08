@@ -147,7 +147,7 @@ public class ControllerAPI {
 //            salvaDatiPatente(tassista);
 //            automobile(auto);
 //            return "Dati salvati correttamente.";
-            String str = map.get("tassista").asText();
+            String str = map.get("tassista").toString();
             System.out.println(str);
 //            ObjectMapper mapper = new ObjectMapper();
 //            Tassista tassista = mapper.readValue(map.get("tassista").asText(), Tassista.class);
