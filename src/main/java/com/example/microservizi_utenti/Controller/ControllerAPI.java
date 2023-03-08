@@ -146,6 +146,7 @@ public class ControllerAPI {
 //            salvaDatiPatente(tassista);
 //            automobile(auto);
 //            return "Dati salvati correttamente.";
+            System.out.println(map);
             return map.get("tassista").asText();
         }catch(Exception e){
             return e.getMessage();
