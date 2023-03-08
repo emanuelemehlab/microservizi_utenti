@@ -131,6 +131,7 @@ public class ControllerAPI {
     @PutMapping("/automobile")
     public String automobile(@RequestBody Automobile auto){
        try{
+           deleteAutomobileByEmail(auto.getTassista().getEmail());
            Autorepository.save(auto);
            return "Automobile inserita.";
        }catch(Exception e){
@@ -186,6 +187,31 @@ public class ControllerAPI {
             }
             if(flag){
                 return "Atomobile con targa :"+targa+" cancellata.";
+            }else{
+                return "Errore: Automobile non esistente.";
+            }
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+
+    @DeleteMapping("/deleteAutomobileByEmail/{email}")
+    public String deleteAutomobileByEmail(@PathVariable("email") String email) {
+        try {
+
+            Boolean flag = false;
+            Iterator<Automobile> it =  Autorepository.findAll().iterator();
+            while(it.hasNext()){
+                Automobile auto = it.next();
+                if(auto.getTassista().getEmail().equals(email)){
+                    Autorepository.deleteById(auto.getTarga());
+                    flag = true;
+                    break;
+                }
+            }
+            if(flag){
+                return "Atomobile di "+ email +" cancellata.";
             }else{
                 return "Errore: Automobile non esistente.";
             }
